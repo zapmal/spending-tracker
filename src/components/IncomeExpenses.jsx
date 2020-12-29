@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { GlobalContext } from '../context/GlobalState';
 
 import SmallHeader from './shared/SmallHeader';
-import MoneyDisplay from './shared/MoneyDisplay';
 
 const IncomeExpensesWrapper = styled.div`
   background-color: #fff;
@@ -22,6 +21,13 @@ const IncomeExpensesWrapper = styled.div`
   & > div:first-of-type {
     border-right: 1px solid #dedede;
   }
+`;
+
+const MoneyDisplay = styled.p`
+  font-size: 20px;
+  letter-spacing: 1px;
+  margin: 5px 0;
+  color: ${props => props.color};
 `;
 
 const IncomeExpenses = () => {
