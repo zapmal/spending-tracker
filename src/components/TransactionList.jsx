@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { GlobalContext } from '../context/GlobalState';
@@ -49,16 +49,34 @@ const DeleteButton = styled.button`
 `;
 
 const TransactionList = () => {
-  const { transactions } = useContext(GlobalContext);
+  const { 
+    transactions, 
+    getTransactions, 
+    loading, 
+    error 
+  } = useContext(GlobalContext);
+
+  useEffect(() => {
+    getTransactions();
+  }, []);
+
+  if (error) return <MidHeader>There was an error.</MidHeader>
 
   return (
     <>
-      <MidHeader>History</MidHeader>
-      <List>
-        {transactions.map(transaction => (
-          <Transaction key={transaction.id} transaction={transaction} />
-        ))}
-      </List>
+    {loading ? (
+      <MidHeader>Loading...</MidHeader>
+    ) : (
+      <>
+        <MidHeader>History</MidHeader>
+        <List>
+          {transactions.map(transaction => (
+            <Transaction key={transaction.id} transaction={transaction} />
+          ))}
+        </List>
+      </>
+    )
+    }
     </>
   )
 };
@@ -70,7 +88,7 @@ const Transaction = ({ transaction }) => {
 
   return (
     <ListItem color={color}>
-      {transaction.text} <span>{sign}{Math.abs(transaction.amount)}</span>
+      {transaction.name} <span>{sign}{Math.abs(transaction.amount)}</span>
       <DeleteButton onClick={() => deleteTransaction(transaction.id)}>x</DeleteButton>
     </ListItem>
   );

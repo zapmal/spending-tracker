@@ -13,7 +13,7 @@ const BigHeader = styled.h1`
 const Balance = () => {
   const { transactions } = useContext(GlobalContext);
 
-  const reducer = (accumulator, { amount }) => accumulator + amount;
+  const reducer = (accumulator, { amount }) => accumulator + parseInt(amount);
   const balance = transactions.reduce(reducer, 0).toFixed(2);
 
   return (

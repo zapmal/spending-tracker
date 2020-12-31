@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
-import { v4 as uuidv4 } from 'uuid';
 
 import { GlobalContext } from '../context/GlobalState';
 
@@ -45,11 +44,9 @@ const AddTransactions = () => {
     event.preventDefault();
 
     const newTransaction = {
-      id: uuidv4(),
-      text: values.text,
+      name: values.name,
       amount: parseInt(values.amount)
     };
-
     addTransaction(newTransaction);
   };
   
@@ -65,8 +62,8 @@ const AddTransactions = () => {
       <MidHeader>Add new Transaction</MidHeader>
       <form onSubmit={onSubmit}>
         <div>
-          <Label htmlFor='text'>Text</Label>
-          <Input type='text' id='text' name='text' onChange={onChange} />
+          <Label htmlFor='name'>Text</Label>
+          <Input type='text' id='name' name='name' onChange={onChange} />
         </div>
         <div>
           <Label htmlFor='amount'>Amount <br/> (negative - expense, positive - income)</Label>

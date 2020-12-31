@@ -33,7 +33,7 @@ const MoneyDisplay = styled.p`
 const IncomeExpenses = () => {
   const { transactions } = useContext(GlobalContext);
 
-  const amounts = transactions.map(transaction => transaction.amount);
+  const amounts = transactions.map(transaction => parseInt(transaction.amount));
   const reducer = (accumulator, amount) => accumulator + amount;
 
   const income = amounts 
